@@ -1,0 +1,28 @@
+#posts-section{
+    display: flex;
+    flex-direction: column;
+}
+
+#posts-section .post {
+    max-width: 650px;
+    padding: 22px 5px;
+    border-bottom: 1px solid #9999995c;
+}.post:hover {
+    background: #ededed25;
+    transition: 0.3s;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.date {
+    opacity: 0.5;
+    font-size: 0.8em;
+}
+
+.post-body {
+    margin-top: 20px;
+}
+  

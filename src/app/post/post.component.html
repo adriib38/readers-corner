@@ -1,0 +1,5 @@
+<div *ngIf="post" id="post-entry">
+  <h1>{{post.title}}</h1>
+  <span id="date">{{post.date | date}}</span>
+  <div [innerHTML]="post.body" id="post-body"></div>
+</div>
