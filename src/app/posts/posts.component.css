@@ -12,6 +12,10 @@
     transition: 0.3s;
 }
 
+.post-elements {
+    margin: 10px 20px;
+}
+
 h2 {
     font-size: 2em;
     margin-bottom: 5px;
@@ -21,8 +25,3 @@ h2 {
     opacity: 0.5;
     font-size: 0.8em;
 }
-
-.post-body {
-    margin-top: 20px;
-}
-  

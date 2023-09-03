@@ -13,11 +13,12 @@ export class PostService {
     return of(POSTS);
   }
 
+
   getPostsPreview(): Observable<Post[]> {
     let posts = POSTS.slice(0, 3);
-    //Slice body to 10 characters
+    //Slice content to 10 characters
     posts.forEach(post => {
-      post.body = post.body.slice(0, 85) + '...'; 
+      post.content = post.content.slice(0, 85) + '...'; 
     });
 
     return of(posts);

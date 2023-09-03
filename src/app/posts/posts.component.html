@@ -1,11 +1,12 @@
 <section id="posts-section">
     <article *ngFor="let post of posts" class="post">
-        <a [routerLink]="['/posts', post.id]">
-            <h2>{{post.title}}</h2>
-            <span class="date">{{post.date | date}}</span>
-            <div class="post-body">
-                <div [innerHTML]="post.body | slice:0:90"></div>
-            </div>
-        </a>
+      <a [routerLink]="['/posts', post.id]">
+        <div class="post-elements">
+          <h2>{{post.title}}</h2>
+          <span class="date">{{post.date | date}}</span>
+          <div class="post-content" [innerHTML]="post.content | slice:0:90"></div>
+        </div>
+      </a>
     </article>
-</section>
+  </section>
+  
