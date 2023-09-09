@@ -1,0 +1,7 @@
+<nav class="nav-links">
+    <a routerLink="/" routerLinkActive="link-active">Home</a>
+    <a routerLink="/about" routerLinkActive="link-active">About</a>
+
+    <a *ngIf="!isLoggedIn" routerLink="/auth" routerLinkActive="link-active">Login</a>
+    <a *ngIf="isLoggedIn" routerLink="/account" routerLinkActive="link-active">Account</a>
+</nav>

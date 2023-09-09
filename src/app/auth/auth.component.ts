@@ -65,7 +65,6 @@ export class AuthComponent {
     } catch (error) {
       console.error('Error al iniciar sesión con GitHub:', error);
     }
-    
   }
 
 }

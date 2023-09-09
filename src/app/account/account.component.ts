@@ -19,22 +19,21 @@ export class AccountComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private readonly supabase: SupabaseService,
-    private formBuilder: FormBuilder
+    private readonly supabase: SupabaseService
   ) {}
 
   async ngOnInit(): Promise<void> {
-    //Check usser logged
+    //Check user logged
     let isLoggedIn = await this.supabase.isUserLoggedIn();
 
     if (isLoggedIn) {
       //User logged actions
-      console.log('Logueado');
+      console.log('Logged');
 
       this.getCurrentUser();
     } else {
       //User NO logged actions
-      console.log('NO Logueado');
+      console.log('NO Logged');
       this.router.navigate(['/auth']);
     }
   }
@@ -47,13 +46,13 @@ export class AccountComponent implements OnInit {
       const { data, error } = await this.supabase.auth.getUser();
 
       if (error) {
-        console.error('Error al obtener el usuario actual: ', error);
+        console.error('Error getting current user: ', error);
       } else {
         this.currentUser = data?.user;
         console.log('Current user: ', this.currentUser);
       }
     } catch (error) {
-      console.error('Error al obtener el usuario actual: ', error);
+      console.error('Error getting current user: ', error);
     }
   }
 
@@ -61,15 +60,16 @@ export class AccountComponent implements OnInit {
    * Close user session
    */
   async logOut() {
-    console.log('logOut()');
 
     try {
       await this.supabase.logOut();
-      console.log('Sesion cerrada con exito');
+      console.log('Session closed');
 
-      this.router.navigate(['/']);
+    
+      location.reload();
+      
     } catch (error) {
-      console.log('Error al cerrar sesión: ', error);
+      console.log('Logout error: ', error);
     }
   }
 }

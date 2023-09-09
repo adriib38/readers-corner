@@ -10,6 +10,7 @@ import { AccountComponent } from './account/account.component';
 
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PostComponent,
     AboutComponent,
     AccountComponent,
-    AuthComponent
+    AuthComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
