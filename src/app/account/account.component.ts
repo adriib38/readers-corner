@@ -64,8 +64,6 @@ export class AccountComponent implements OnInit {
     try {
       await this.supabase.logOut();
       console.log('Session closed');
-
-    
       location.reload();
       
     } catch (error) {

@@ -39,16 +39,6 @@ export class SupabaseService {
     return this.supabase.auth.getUser();
   }
 
-  /** 
-  get session() {
-    this.supabase.auth.getSession().then(({ data }) => {
-      this._session = data.session;
-      console.log(data);
-    });
-    return this._session;
-  }
-  */
-
   async isUserLoggedIn(): Promise<boolean> {
     try {
       const { data: { session } } = await this.supabase.auth.getSession();
@@ -61,7 +51,6 @@ export class SupabaseService {
     }
   }
   
-
   private isSessionExpired(expiresAt: string): boolean {
     if (!expiresAt) {
       return true;
@@ -74,26 +63,10 @@ export class SupabaseService {
     return currentTime >= expirationTime;
   }
 
-
-  /**
-  profile(user: User) {
-    return this.supabase
-      .from('profiles')
-      .select(`username, website, avatar_url`)
-      .eq('id', user.id)
-      .single()
-  }
-
-  authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {
-    return this.supabase.auth.onAuthStateChange(callback)
-  }
-*/
-
   /**
    * This method is used for passwordless logins where an OTP is  sent to the user's email or phone number.If the user does not exist,signInWithOtp() will register the user.
-   * 
    */
-  signIn(email: string) {
+  signInMagicLink(email: string) {
     return this.supabase.auth.signInWithOtp({ email });
   }
 
@@ -112,6 +85,9 @@ export class SupabaseService {
     return data;
   }
 
+  /**
+   * Close user session
+   */
   async logOut() {
     const { error } = await this.supabase.auth.signOut();
 
@@ -120,6 +96,27 @@ export class SupabaseService {
     }
   }
 
-  
+  /**
+   * Get All posts for Post table
+   */
+  async getAllPosts() {
+    try {
+      let { data: Posts, error } = await this.supabase
+      .from('Posts')
+      .select('*') 
+
+      if (error) {
+        console.error('Error getting posts: ', error);
+        return null;
+      } else {
+        return Posts;
+      }
+    } catch (error) {
+      console.error('Error getting posts: ', error);
+      return null;
+    }
+  }
+ 
+
   
 }

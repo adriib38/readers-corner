@@ -42,7 +42,7 @@ export class AuthComponent {
     try {
       this.loading = true
       const email = this.signInForm.value.email as string
-      const { error } = await this.supabase.signIn(email)
+      const { error } = await this.supabase.signInMagicLink(email)
       if (error) throw error
       alert('Check your email for the login link!')
     } catch (error) {

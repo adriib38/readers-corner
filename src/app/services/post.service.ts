@@ -13,7 +13,6 @@ export class PostService {
     return of(POSTS);
   }
 
-
   getPostsPreview(): Observable<Post[]> {
     let posts = POSTS.slice(0, 3);
     //Slice content to 10 characters
@@ -28,4 +27,6 @@ export class PostService {
     const post = POSTS.find(p => p.id === id)!;
     return of(post);
   }
+
+ 
 }

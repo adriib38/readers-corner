@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../interfaces/post';
 import { PostService } from '../services/post.service';
-
-import { createClient, PostgrestSingleResponse, SupabaseClient } from '@supabase/supabase-js';
+import { SupabaseService } from '../services/supabase.service';
+import {
+  createClient,
+  PostgrestSingleResponse,
+  SupabaseClient,
+} from '@supabase/supabase-js';
 
 import { environment } from 'src/.env';
 
@@ -13,40 +17,30 @@ import { environment } from 'src/.env';
 })
 export class PostsComponent implements OnInit {
   posts: Post[] = [];
+  noPosts = false;
 
+  constructor(
+    private postService: PostService,
 
-  private supabaseUrl = environment.supabaseUrl;
-  private supabaseKey = environment.supabaseKey;
-  private supabase: SupabaseClient;
-  
-  constructor(private postService: PostService) {
-  
-    this.supabase = createClient(this.supabaseUrl, this.supabaseKey);
+    private readonly supabase: SupabaseService
+  ) {}
 
-  }
+  async ngOnInit(): Promise<void> {
+    try {
+      let posts = await this.supabase.getAllPosts();
 
-  ngOnInit(): void {
-    //this.getPostsPreview();
-    this.fetchPosts();
+      if(posts != null){
+        this.posts = posts;
+      } else {
+        this.noPosts = true;
+      }
+     
+    } catch (error) {
+
+    }
   }
 
   getPostsPreview(): void {
     this.postService.getPosts().subscribe((posts) => (this.posts = posts));
-  }
-
-  fetchPosts() {
-    this.supabase
-      .from('Posts')
-      .select('*')
-      .then((response) => {
-        if (response.error) {
-          console.error('Error fetching data:', response.error);
-        } else {
-
-          this.posts = response.data;
-          console.log(this.posts);
-        }
-      });
-     
   }
 }
