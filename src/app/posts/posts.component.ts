@@ -21,7 +21,6 @@ export class PostsComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-
     private readonly supabase: SupabaseService
   ) {}
 

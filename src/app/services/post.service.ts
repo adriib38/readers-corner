@@ -23,10 +23,12 @@ export class PostService {
     return of(posts);
   }
 
+  /**
   getPostById(id: number): Observable<Post> {
     const post = POSTS.find(p => p.id === id)!;
     return of(post);
   }
+  */
 
  
 }

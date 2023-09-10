@@ -9,6 +9,8 @@ import {
 } from '@supabase/supabase-js';
 import { environment } from 'src/.env';
 import { CookieService } from 'ngx-cookie-service';
+import { Post } from '../interfaces/post';
+import { Observable } from 'rxjs';
 
 export interface Profile {
   id?: string;
@@ -69,20 +71,21 @@ export class SupabaseService {
       return 'assets/images/profile_blank.png';
     }
   }
-  
 
   async isUserLoggedIn(): Promise<boolean> {
     try {
-      const { data: { session } } = await this.supabase.auth.getSession();
-  
+      const {
+        data: { session },
+      } = await this.supabase.auth.getSession();
+
       // Convierte data.session en un valor booleano y retórnalo.
       return Boolean(session);
     } catch (error) {
-      console.error("Error al verificar la sesión del usuario: ", error);
+      console.error('Error al verificar la sesión del usuario: ', error);
       return false;
     }
   }
-  
+
   private isSessionExpired(expiresAt: string): boolean {
     if (!expiresAt) {
       return true;
@@ -134,8 +137,8 @@ export class SupabaseService {
   async getAllPosts() {
     try {
       let { data: Posts, error } = await this.supabase
-      .from('Posts')
-      .select('*') 
+        .from('Posts')
+        .select('*');
 
       if (error) {
         console.error('Error getting posts: ', error);
@@ -148,7 +151,28 @@ export class SupabaseService {
       return null;
     }
   }
- 
 
-  
+  async getPostById(postId: string): Promise<Post | null> {
+    try {
+      let { data: post, error } = await this.supabase
+        .from('Posts')
+        .select('*')
+        .eq('id', postId)
+        .single();
+
+      if (error) {
+        console.error('Error getting post: ', error);
+        return null;
+      }
+
+      if (post) {
+        return post;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error('Error getting post: ', error);
+      return null;
+    }
+  }
 }

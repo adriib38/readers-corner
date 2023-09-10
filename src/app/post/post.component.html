@@ -1,5 +1,9 @@
-<div *ngIf="post" id="post-entry">
-  <h1>{{post.title}}</h1>
-  <span id="date">{{post.date | date}}</span>
-  <div [innerHTML]="post.content" id="post-content"></div>
+<div *ngIf="noPost">
+  <h2>Post no encontrado 😧</h2>
+</div>
+
+<div *ngIf="currentPost" id="post-entry">
+  <h1>{{currentPost.title}}</h1>
+  <span id="date">{{currentPost.date | date}}</span>
+  <div [innerHTML]="currentPost.content" id="post-content"></div>
 </div>
