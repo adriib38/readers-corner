@@ -9,6 +9,7 @@ import { SupabaseService } from '../services/supabase.service';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn = false;
+  avatarUrl: string | null = 'assets/images/profile_blank.png';
 
   constructor(
     private router: Router,
@@ -18,6 +19,9 @@ export class NavbarComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     //Check usser logged
     this.isLoggedIn = await this.supabase.isUserLoggedIn();
+    
+    //Get avatar
+    this.avatarUrl = await this.supabase.profilePicture();
   }
 
 }

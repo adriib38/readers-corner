@@ -39,6 +39,38 @@ export class SupabaseService {
     return this.supabase.auth.getUser();
   }
 
+  /**
+   * Return profile avatar or default avatar
+   */
+  async profilePicture(): Promise<string | null> {
+    //Verify cache
+    const cachedImage = localStorage.getItem('profilePicture');
+
+    if (cachedImage) {
+      return cachedImage;
+    }
+
+    try {
+      const { data, error } = await this.supabase.auth.getUser();
+
+      if (error) {
+        console.error('Error getting current user: ', error);
+        return 'assets/images/profile_blank.png';
+      } else {
+        let currentUser = data?.user;
+
+        let avatar = String(currentUser.user_metadata['avatar_url']);
+        localStorage.setItem('profilePicture', avatar);
+
+        return avatar;
+      }
+    } catch (error) {
+      console.error('Error getting current user: ', error);
+      return 'assets/images/profile_blank.png';
+    }
+  }
+  
+
   async isUserLoggedIn(): Promise<boolean> {
     try {
       const { data: { session } } = await this.supabase.auth.getSession();

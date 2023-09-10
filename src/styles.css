@@ -18,15 +18,6 @@ app-root {
     padding: 1rem;
 }
 
-nav {
-    display: flex;
-    gap: 1rem;
-}
-
-nav a:hover{
-    text-decoration: underline;
-}
-
 a {
     text-decoration: none;
 }
