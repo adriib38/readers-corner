@@ -1,16 +1,16 @@
-<div *ngIf="noPosts" class="card yellow">
-  NO posts yet 😅
-</div>
+<div *ngIf="noPosts" class="card yellow">NO posts yet 😅</div>
 
 <section *ngIf="posts" id="posts-section">
-    <article *ngFor="let post of posts" class="post">
-      <a [routerLink]="['/posts', post.id]">
-        <div class="post-elements">
-          <h2>{{post.title}}</h2>
-          <span class="date">{{post.date | date}}</span>
-          <div class="post-content" [innerHTML]="post.content | slice:0:90"></div>
-        </div>
-      </a>
-    </article>
-  </section>
-  
+  <article *ngFor="let post of posts" class="post">
+    <a [routerLink]="['/posts', post.id]">
+      <div class="post-elements">
+        <h2>{{ post.title }}</h2>
+        <span class="date">{{ post.date | date }}</span>
+        <div
+          class="post-content"
+          [innerHTML]="post.content | slice : 0 : 90"
+        ></div>
+      </div>
+    </a>
+  </article>
+</section>

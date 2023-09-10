@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AuthSession, User } from '@supabase/supabase-js';
-import { Profile, SupabaseService } from '../services/supabase.service';
+import { Profile, AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,12 +19,12 @@ export class AccountComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private readonly supabase: SupabaseService
+    private readonly authService: AuthService
   ) {}
 
   async ngOnInit(): Promise<void> {
     //Check user logged
-    let isLoggedIn = await this.supabase.isUserLoggedIn();
+    let isLoggedIn = await this.authService.isUserLoggedIn();
 
     if (isLoggedIn) {
       //User logged actions
@@ -43,7 +43,7 @@ export class AccountComponent implements OnInit {
    */
   async getCurrentUser() {
     try {
-      const { data, error } = await this.supabase.auth.getUser();
+      const { data, error } = await this.authService.auth.getUser();
 
       if (error) {
         console.error('Error getting current user: ', error);
@@ -62,7 +62,7 @@ export class AccountComponent implements OnInit {
   async logOut() {
 
     try {
-      await this.supabase.logOut();
+      await this.authService.logOut();
       console.log('Session closed');
       location.reload();
       

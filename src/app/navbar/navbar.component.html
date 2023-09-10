@@ -3,7 +3,10 @@
     <a routerLink="/about" routerLinkActive="link-active">About</a>
 
     <a *ngIf="!isLoggedIn" routerLink="/auth" routerLinkActive="link-active">Login</a>
+
+    <a *ngIf="isLoggedIn" routerLink="/new">+</a>
     <a *ngIf="isLoggedIn" routerLink="/account" routerLinkActive="link-active">
         <img *ngIf="isLoggedIn" [src]="avatarUrl" id="avatar" alt="" width="50px">
     </a>
+
 </nav>

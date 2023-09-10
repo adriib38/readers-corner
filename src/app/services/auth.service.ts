@@ -22,7 +22,7 @@ export interface Profile {
 @Injectable({
   providedIn: 'root',
 })
-export class SupabaseService {
+export class AuthService {
   private supabaseUrl = environment.supabaseUrl;
   private supabaseKey = environment.supabaseKey;
   private supabase: SupabaseClient;
@@ -131,48 +131,5 @@ export class SupabaseService {
     }
   }
 
-  /**
-   * Get All posts for Post table
-   */
-  async getAllPosts() {
-    try {
-      let { data: Posts, error } = await this.supabase
-        .from('Posts')
-        .select('*');
-
-      if (error) {
-        console.error('Error getting posts: ', error);
-        return null;
-      } else {
-        return Posts;
-      }
-    } catch (error) {
-      console.error('Error getting posts: ', error);
-      return null;
-    }
-  }
-
-  async getPostById(postId: string): Promise<Post | null> {
-    try {
-      let { data: post, error } = await this.supabase
-        .from('Posts')
-        .select('*')
-        .eq('id', postId)
-        .single();
-
-      if (error) {
-        console.error('Error getting post: ', error);
-        return null;
-      }
-
-      if (post) {
-        return post;
-      } else {
-        return null;
-      }
-    } catch (error) {
-      console.error('Error getting post: ', error);
-      return null;
-    }
-  }
+  
 }

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core'
-import { FormBuilder } from '@angular/forms'
-import { SupabaseService } from '../services/supabase.service'
-import { Router } from "@angular/router"
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -12,53 +12,53 @@ export class AuthComponent {
   isLoggedIn = false;
   userData: any;
 
-  loading = false
+  loading = false;
 
   signInForm = this.formBuilder.group({
     email: '',
-  })
+  });
 
   constructor(
     private router: Router,
-    private readonly supabase: SupabaseService,
+    private readonly authService: AuthService,
     private readonly formBuilder: FormBuilder
   ) {}
 
   async ngOnInit() {
     //Check usser logged
-    this.isLoggedIn = await this.supabase.isUserLoggedIn();
+    this.isLoggedIn = await this.authService.isUserLoggedIn();
 
     if (this.isLoggedIn) {
       //User logged actions
-      console.log("Logueado");
+      console.log('Logueado');
       this.router.navigate(['/account']);
     } else {
       //User NO logged actions
-      console.log("NO Logueado");
+      console.log('NO Logueado');
     }
   }
 
   async onSubmitMagicLink(): Promise<void> {
     try {
-      this.loading = true
-      const email = this.signInForm.value.email as string
-      const { error } = await this.supabase.signInMagicLink(email)
-      if (error) throw error
-      alert('Check your email for the login link!')
+      this.loading = true;
+      const email = this.signInForm.value.email as string;
+      const { error } = await this.authService.signInMagicLink(email);
+      if (error) throw error;
+      alert('Check your email for the login link!');
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message)
+        alert(error.message);
       }
     } finally {
-      this.signInForm.reset()
-      this.loading = false
+      this.signInForm.reset();
+      this.loading = false;
     }
   }
 
   async signInWithGitHub() {
-    console.log("signInWithGitHub")
+    console.log('signInWithGitHub');
     try {
-      const data = await this.supabase.signInWithGitHub();
+      const data = await this.authService.signInWithGitHub();
       this.userData = data;
 
       console.log('Data recibida: ' + JSON.stringify(this.userData));
@@ -66,5 +66,4 @@ export class AuthComponent {
       console.error('Error al iniciar sesión con GitHub:', error);
     }
   }
-
 }

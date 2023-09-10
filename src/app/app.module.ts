@@ -11,6 +11,7 @@ import { AccountComponent } from './account/account.component';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NewpostComponent } from './newpost/newpost.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AboutComponent,
     AccountComponent,
     AuthComponent,
-    NavbarComponent
+    NavbarComponent,
+    NewpostComponent
   ],
   imports: [
     BrowserModule,

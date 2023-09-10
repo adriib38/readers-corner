@@ -1,14 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../interfaces/post';
-import { PostService } from '../services/post.service';
-import { SupabaseService } from '../services/supabase.service';
-import {
-  createClient,
-  PostgrestSingleResponse,
-  SupabaseClient,
-} from '@supabase/supabase-js';
-
-import { environment } from 'src/.env';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-posts',
@@ -19,27 +11,17 @@ export class PostsComponent implements OnInit {
   posts: Post[] = [];
   noPosts = false;
 
-  constructor(
-    private postService: PostService,
-    private readonly supabase: SupabaseService
-  ) {}
+  constructor(private readonly postsService: PostsService) {}
 
   async ngOnInit(): Promise<void> {
     try {
-      let posts = await this.supabase.getAllPosts();
+      let posts = await this.postsService.getAllPosts();
 
-      if(posts != null){
+      if (posts != null) {
         this.posts = posts;
       } else {
         this.noPosts = true;
       }
-     
-    } catch (error) {
-
-    }
-  }
-
-  getPostsPreview(): void {
-    this.postService.getPosts().subscribe((posts) => (this.posts = posts));
+    } catch (error) {}
   }
 }
