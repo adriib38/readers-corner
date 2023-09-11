@@ -1,8 +1,8 @@
 <h1>✍️ New post</h1>
 
-<form id="form-new-post">
-    <input autofocus type="text" id="title" name="title" placeholder="This is a post">
-    <textarea rows="5" cols="40"></textarea>
+<div id="form-new-post">
+    <input autofocus type="text" id="title" name="title" placeholder="This is a post" [(ngModel)]="title">
+    <textarea rows="5" cols="40" [(ngModel)]="content"></textarea>
 
-    <input type="submit" value="POST">
-</form>
+    <button class="btn-blue" (click)="btnEnviar()">POST</button>
+</div>

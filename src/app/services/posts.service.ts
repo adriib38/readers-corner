@@ -68,4 +68,24 @@ export class PostsService {
       return null;
     }
   }
+
+  async publicPost(title: string, content: string): Promise<boolean> {
+    try {
+      const { data, error } = await this.supabase
+        .from('Posts')
+        .insert([{ title: title, content: content }])
+        .select();
+
+      if (error) {
+        console.error('Error publishing post:', error);
+        return false;
+      }
+
+      console.log('Post published successfully:', data);
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 }

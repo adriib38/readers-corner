@@ -23,22 +23,6 @@
     font-size: 2em;
   }
   
-  /* Estilos para el botón de envío */
-  #form-new-post input[type="submit"] {
-    background-color: #007bff; /* Color de fondo del botón */
-    color: #fff; /* Color del texto del botón */
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  /* Cambiar el color del botón cuando se pasa el mouse sobre él */
-  #form-new-post input[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
   /* Estilos adicionales para textarea (campo de texto grande) si es necesario */
   #form-new-post textarea {
     resize: vertical;
