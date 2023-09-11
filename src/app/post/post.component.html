@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="currentPost" id="post-entry">
-  <h1>{{currentPost.title}}</h1>
-  <span id="date">{{currentPost.date | date}}</span>
+  <span id="date">{{ currentPost.created_at | date }}</span>
+  <h1>{{ currentPost.title }}</h1>
   <div [innerHTML]="currentPost.content" id="post-content"></div>
 </div>
