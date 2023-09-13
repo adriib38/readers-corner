@@ -14,7 +14,7 @@ export class AuthComponent {
 
   loading = false;
 
-  signInForm = this.formBuilder.group({
+  signInFormMagiclink = this.formBuilder.group({
     email: '',
   });
 
@@ -41,7 +41,7 @@ export class AuthComponent {
   async onSubmitMagicLink(): Promise<void> {
     try {
       this.loading = true;
-      const email = this.signInForm.value.email as string;
+      const email = this.signInFormMagiclink.value.email as string;
       const { error } = await this.authService.signInMagicLink(email);
       if (error) throw error;
       alert('Check your email for the login link!');
@@ -50,7 +50,7 @@ export class AuthComponent {
         alert(error.message);
       }
     } finally {
-      this.signInForm.reset();
+      this.signInFormMagiclink.reset();
       this.loading = false;
     }
   }

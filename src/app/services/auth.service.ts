@@ -120,6 +120,13 @@ export class AuthService {
     return data;
   }
 
+  async createAccount() {
+    const { data, error } = await this.supabase.auth.signUp({
+      email: 'example@email.com',
+      password: 'example-password',
+    })
+  }
+
   /**
    * Close user session
    */

@@ -1,31 +1,27 @@
-/* Estilos para el formulario */
 #form-new-post {
-    width: 100%;
-    margin: 0 auto; /* Centrar el formulario horizontalmente */
-    padding: 20px;
-    background-color: #f2f2f214; /* Color de fondo */
-    border: 1px solid #ccc; /* Borde del formulario */
-    border-radius: 5px; /* Bordes redondeados */
-  }
-  
-  /* Estilos para los campos de entrada de texto */
-  #form-new-post #title,
-  #form-new-post textarea {
-    font-family: Arial, Helvetica, sans-serif;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f214;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
-  #form-new-post #title {
-    font-size: 2em;
-  }
-  
-  /* Estilos adicionales para textarea (campo de texto grande) si es necesario */
-  #form-new-post textarea {
-    resize: vertical;
-    height: 500px;
-  }
-  
+#form-new-post #title,
+#form-new-post textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#form-new-post #title {
+  font-size: 2em;
+}
+
+#form-new-post textarea {
+  resize: vertical;
+  height: 500px;
+}
